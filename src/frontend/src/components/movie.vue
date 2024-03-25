@@ -26,9 +26,31 @@
         <td> {{ movie.language }} </td>
         <td> {{ movie.ageLimit }} </td>
         <td> {{ movie.startTime }} </td>
+        <td>
+          <button @click = "addToWatched(movie)"> Add to Watched</button>>
+          <button @click = "goToSeating(movie.id)"> View Seating </button>
+        </td>
       </tr>
       </tbody>
     </table>
+    <h2>Watched Movies</h2>>
+    <table class = "table">
+      <thead>
+      <th> Movie Title</th>
+      <th> Movie Genre</th>
+      <th> Movie Language</th>
+      <th> Movie Age Limit</th>
+      <th> Movie Starting Time</th>
+      </thead>
+      <tr v-for = "movie in watchedMovies" v-bind:key = "movie.id">
+        <td> {{ movie.title }}</td>
+        <td> {{ movie.genre }}</td>
+        <td> {{ movie.language }}</td>
+        <td> {{ movie.ageLimit }}</td>
+        <td> {{ movie.startTime }}</td>
+      </tr>
+    </table>
+    <button @click = "clearWatchedMovies"> Clear all Watched Movies </button>
   </div>
 </template>
 
@@ -43,6 +65,7 @@ export default {
   data() {
     return {
       movies: [],
+      watchedMovies: [],
       selectedSort: 'startTime' //default sorting criteria
     }
   },
@@ -57,6 +80,18 @@ export default {
         if (a[this.selectedSort] > b[this.selectedSort]) return 1;
         return 0;
       })
+    },
+    addToWatched(movie) {
+      //Avoid duplicates
+      if (!this.watchedMovies.some(watchedMovie => watchedMovie.id ===  movie.id)) {
+        this.watchedMovies.push(movie);
+      }
+    },
+    clearWatchedMovies() {
+      this.watchedMovies = [];
+    },
+    goToSeating(movieId) {
+      this.$router.push({ name: 'seating', params: { id: movieId } });
     }
   },
   created() {

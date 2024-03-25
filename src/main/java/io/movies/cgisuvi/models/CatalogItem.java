@@ -3,6 +3,8 @@ package io.movies.cgisuvi.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,5 +28,5 @@ public class CatalogItem {
     @Column (name = "age")
     private String ageLimit;
     @Column (name = "time")
-    private String startTime;
+    private String startTime; // LocalDateTime?
 }
