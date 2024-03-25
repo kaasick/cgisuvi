@@ -1,9 +1,17 @@
 <template>
+
+  <!-- 2 tables, a movie table of movies showing -->
+  <!-- A table where movies can be added as "Watched Movies" -->
+  <!-- Buttons to add to Watched Movies and or go to seating. -->
+
+
   <div class = "container">
     <h1 class = "text-center">Movies list</h1>
     <!-- Sorting controls -->
     <div class = "sorting-control">
+      <!-- Basic sorting by chosen {{Attribute}} -->
       <select v-model="selectedSort" @change = "sortMovies">
+
         <option value="genre">Genre</option>
         <option value="Lang">Language</option>
         <option value="ageLimit">Age Limit</option>
@@ -50,6 +58,7 @@
         <td> {{ movie.startTime }}</td>
       </tr>
     </table>
+    <!-- Button to clear the list. Button to remove a singular movie?? -->
     <button @click = "clearWatchedMovies"> Clear all Watched Movies </button>
   </div>
 </template>
@@ -60,6 +69,10 @@ import movieService from "@/services/movieService";
 
 
 export default {
+  //As of now, the basic methods to provide some funcionality to the page
+  //hopefully the method names are self-explnetory enoug for now
+
+
   // eslint-disable-next-line
   name: 'Movies',
   data() {

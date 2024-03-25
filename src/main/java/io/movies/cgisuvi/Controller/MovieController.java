@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping("/api")
 @CrossOrigin("http://localhost:3000/")
 public class MovieController {
+    //A basic controller to fetch the movies.
 
     @Autowired
     private MovieRepo movieRepo;

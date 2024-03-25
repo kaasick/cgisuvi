@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 @Table(name = "movies")
 
 public class CatalogItem {
+    //Defining a object to represent a movie and all that goes with it.
+    //Id is used to later assign to appropriate url for the seating.
+    //startTime should be changed to LocalDateTime to accomodate different days of the week
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

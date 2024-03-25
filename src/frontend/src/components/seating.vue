@@ -5,6 +5,7 @@
 </template>
 
 <script>
+//TBD
 export default {
   // eslint-disable-next-line
   name: 'seating',

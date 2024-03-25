@@ -4,6 +4,7 @@ import movie from "@/components/movie.vue";
 import seating from "@/components/seating.vue"
 
 const routes = [
+    //Basic routing configuration, mostly to get to the seating page.
     {
       path: '/',
       name: 'home',

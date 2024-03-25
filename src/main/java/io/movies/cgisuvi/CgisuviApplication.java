@@ -9,6 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CgisuviApplication implements CommandLineRunner {
+	//Running the main method to get an endpoint to get data from.
+	//Movies themselves will be hardcoded, hopefully with enough variety to cover
+	//testing by hand.
 
 	public static void main(String[] args) {
 		SpringApplication.run(io.movies.cgisuvi.CgisuviApplication.class, args);
