@@ -7,6 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 @SpringBootApplication
 public class CgisuviApplication implements CommandLineRunner {
 	//Running the main method to get an endpoint to get data from.
@@ -17,10 +21,21 @@ public class CgisuviApplication implements CommandLineRunner {
 		SpringApplication.run(io.movies.cgisuvi.CgisuviApplication.class, args);
 	}
 
+	private String generateSeatsString() {
+		Random random = new Random();
+		int numOfSeats = random.nextInt(31) + 10; //Generate num of taken seats in range of 10 - 40
+		return IntStream.generate(() -> random.nextInt(200) + 1) //a random int, range 1-200
+				.distinct() //to make generated values unique
+				.limit(numOfSeats) //so they'd be in the range we generate
+				.mapToObj(String::valueOf) // covnert int to str
+				.collect(Collectors.joining(",")); //join them with commas
+	}
+
 	@Autowired
 	private MovieRepo movieRepo;
 	@Override
 	public void run(String... args) throws Exception {
+
 
 		CatalogItem movie1 = CatalogItem.builder()
 				.title("LOTR")
@@ -28,6 +43,25 @@ public class CgisuviApplication implements CommandLineRunner {
 				.language("English")
 				.ageLimit("PG13")
 				.startTime("08:30")
+				.takenSeatsString(generateSeatsString())
+				.build();
+
+		CatalogItem lotr1 = CatalogItem.builder()
+				.title("LOTR")
+				.genre("Adventure")
+				.language("English")
+				.ageLimit("PG13")
+				.startTime("14:00")
+				.takenSeatsString(generateSeatsString())
+				.build();
+
+		CatalogItem lotr2 = CatalogItem.builder()
+				.title("LOTR")
+				.genre("Adventure")
+				.language("English")
+				.ageLimit("PG13")
+				.startTime("20:15")
+				.takenSeatsString(generateSeatsString())
 				.build();
 
 		CatalogItem movie2 = CatalogItem.builder()
@@ -36,6 +70,7 @@ public class CgisuviApplication implements CommandLineRunner {
 				.language("English")
 				.ageLimit("PG16")
 				.startTime("21:30")
+				.takenSeatsString(generateSeatsString())
 				.build();
 
 		CatalogItem movie3 = CatalogItem.builder()
@@ -44,6 +79,7 @@ public class CgisuviApplication implements CommandLineRunner {
 				.language("English")
 				.ageLimit("PG18")
 				.startTime("16:30")
+				.takenSeatsString(generateSeatsString())
 				.build();
 
 		CatalogItem movie4 = CatalogItem.builder()
@@ -52,11 +88,14 @@ public class CgisuviApplication implements CommandLineRunner {
 				.language("Estonian")
 				.ageLimit("PG3")
 				.startTime("12:30")
+				.takenSeatsString(generateSeatsString())
 				.build();
 
 		movieRepo.save(movie1);
 		movieRepo.save(movie2);
 		movieRepo.save(movie3);
 		movieRepo.save(movie4);
+		movieRepo.save(lotr1);
+		movieRepo.save(lotr2);
 	}
 }

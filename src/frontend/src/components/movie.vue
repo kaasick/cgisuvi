@@ -25,6 +25,7 @@
       <th> Movie Language</th>
       <th> Movie Age Limit</th>
       <th> Movie Starting time</th>
+      <th> Available seats</th>
       </thead>
       <!-- Table body -->
       <tbody>
@@ -34,6 +35,7 @@
         <td> {{ movie.language }} </td>
         <td> {{ movie.ageLimit }} </td>
         <td> {{ movie.startTime }} </td>
+        <td> {{availableSeats(movie.takenSeatsString)}} </td>
         <td>
           <button @click = "addToWatched(movie)"> Add to Watched</button>>
           <button @click = "goToSeating(movie.id)"> View Seating </button>
@@ -79,13 +81,14 @@ export default {
     return {
       movies: [],
       watchedMovies: [],
-      selectedSort: 'startTime' //default sorting criteria
+      selectedSort: 'startTime' //sorted by startTime by default
     }
   },
   methods: {
     getMovies() {
       movieService.getCatalogItem().then((response) =>
           this.movies = response.data)
+          this.sortMovies() //sort the movies the first time they are fetched by startTime
     },
     sortMovies() {
       this.movies.sort((a, b) => {
@@ -96,7 +99,7 @@ export default {
     },
     addToWatched(movie) {
       //Avoid duplicates
-      if (!this.watchedMovies.some(watchedMovie => watchedMovie.id ===  movie.id)) {
+      if (!this.watchedMovies.some(watchedMovie => watchedMovie.title ===  movie.title)) {
         this.watchedMovies.push(movie);
       }
     },
@@ -105,6 +108,12 @@ export default {
     },
     goToSeating(movieId) {
       this.$router.push({ name: 'seating', params: { id: movieId } });
+    },
+    availableSeats(takenSeatsString) {
+      if (!takenSeatsString) return 200; //if no seats are taken <=> takenSeatsString is empty
+
+      const takenSeatCount = takenSeatsString.split(',').length; //take the string, split, get the length
+      return 200 - takenSeatCount //return 200 - seatcount
     }
   },
   created() {

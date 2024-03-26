@@ -1,7 +1,7 @@
 Summer internship test project for CGI
 
 A simple cinema movie catalog with basic sorting and a recommender based on watched movies.
-For watched movies, click on the ones you have seen, and then they can be sorted if so is wished.
+For watched movies, click on the ones you have seen (unique titles), and then a recommendation is given if so is wished.
 When a suitable movie is chosen, a seating chart will be shown, where chosen number of seats can be chosen from the seating chart with randomly generated seats being taken.
 
 No account creating system was created to save time and try to focus on the funcionality.

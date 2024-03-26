@@ -33,9 +33,9 @@ export default {
   background-color: #f5f5f5;
   padding: 10px 20px;
 }
-
+//logo size
 .logo-link img {
-  width: 80px; /* Adjust based on your logo's dimensions */
+  width: 40px;
   height: auto;
 }
 </style>
