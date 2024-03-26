@@ -70,9 +70,9 @@ import movieService from "@/services/movieService";
 
 export default {
   //As of now, the basic methods to provide some funcionality to the page
-  //hopefully the method names are self-explnetory enoug for now
+  //hopefully the method names are self-explanatory enough for now
 
-
+  //Disabled next line do not get an eslint error for having a bad variable name o.o
   // eslint-disable-next-line
   name: 'Movies',
   data() {
