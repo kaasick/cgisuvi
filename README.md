@@ -15,7 +15,7 @@ In the seating charts, a recommendation for seats is given, hoping for a middle 
 this functions to up to 5 tickets. Otherwise, seats can be chosen/unchosen by clicking on them and finally, confirm your seats by clicking the "Confirm seats" button.  
 
 
-No account creating system was created to save time and try to focus on the funcionality.
+No account creating system was created to save time and try to focus on the funcionality. The database connection dependancies are there, but the data has been hardcoded and not connected to the database.
 
 Prerequisites to run the app:
 **Node.js**: Required to run the Vue.js frontend.
