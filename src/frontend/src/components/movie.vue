@@ -16,7 +16,13 @@
         <option value="Lang">Language</option>
         <option value="ageLimit">Age Limit</option>
         <option value="startTime">Start Time</option>
+
       </select>
+      <!-- The button to sort based on movies watched, is unclickable when the
+       watched movies list is empty -->
+      <button @click="sortMoviesByWatched" :disabled="watchedMovies.length === 0"
+              title="Add movies to Watched Movies list to enable this feature.">
+        Recommend Based on Watched</button>
     </div>
     <table class = "table table-striped">
       <thead>
@@ -86,16 +92,28 @@ export default {
   },
   methods: {
     getMovies() {
-      movieService.getCatalogItem().then((response) =>
-          this.movies = response.data)
-          this.sortMovies() //sort the movies the first time they are fetched by startTime
+      movieService.getCatalogItem().then((response) => {
+        this.movies = response.data;
+        this.sortMovies(); //sort the movies the first time they are fetched by startTime
+      })
     },
     sortMovies() {
-      this.movies.sort((a, b) => {
-        if (a[this.selectedSort] < b[this.selectedSort]) return -1;
-        if (a[this.selectedSort] > b[this.selectedSort]) return 1;
-        return 0;
-      })
+      //Have to handle sorting by age limit a bit differently, because it is PG{digit(s)}
+      if (this.selectedSort === 'ageLimit') {
+        this.movies.sort((a, b) => {
+          const ageA = parseInt(a.ageLimit.replace('PG', ''), 10);
+          const ageB = parseInt(b.ageLimit.replace('PG', ''), 10);
+
+          return ageA - ageB;
+        });
+      } else {
+        //default sorting for other fields
+        this.movies.sort((a, b) => {
+          if (a[this.selectedSort] < b[this.selectedSort]) return -1;
+          if (a[this.selectedSort] > b[this.selectedSort]) return 1;
+          return 0;
+        })
+      }
     },
     addToWatched(movie) {
       //Avoid duplicates
@@ -107,13 +125,59 @@ export default {
       this.watchedMovies = [];
     },
     goToSeating(movieId) {
-      this.$router.push({ name: 'seating', params: { id: movieId } });
+      const movie = this.movies.find(m => m.id === movieId);
+      if (movie) {
+        this.$router.push({
+          name: 'seating',
+          params: { id: movieId },
+          query: { takenSeatsString: movie.takenSeatsString || '' }
+            })
+        }
+      //this.$router.push({ name: 'seating', params: { id: movieId } });
     },
     availableSeats(takenSeatsString) {
       if (!takenSeatsString) return 200; //if no seats are taken <=> takenSeatsString is empty
 
       const takenSeatCount = takenSeatsString.split(',').length; //take the string, split, get the length
       return 200 - takenSeatCount //return 200 - seatcount
+    },
+    //Method to calculate the similarity score, with weights
+    SimilarityScore(movie) {
+      let score = 0;
+      this.watchedMovies.forEach(watchedMovie => {
+        //genre weights
+        if (movie.genre === watchedMovie.genre) score += 3;
+        //age limit weights
+        if (movie.ageLimit === watchedMovie.ageLimit) score += 3;
+        //comparing start Times
+        const timeDiff = Math.abs(new Date(movie.startTime)
+            - new Date(watchedMovie.startTime));
+        if (timeDiff <= 2 * 36000000) score += 1; //2 hours in milliseconds
+        //If the movie has been watched, apply a big penalty
+        //So it would be at the bottom of the list
+        //as in not recommended
+        const hasBeenWatched = this.watchedMovies.some(
+            watchedMovie => watchedMovie.title == movie.title);
+        if (hasBeenWatched) score -= 100
+
+      });
+      return score;
+    },
+    sortMoviesByWatched() {
+      const scoredMovies = this.movies.map(movie => {
+        return {
+          ...movie,
+          similairtyscore: this.SimilarityScore(movie)
+        };
+      });
+
+      scoredMovies.sort((a,b) => {
+        if (a.similairtyscore > b.similairtyscore) return -1;
+        if (a.similairtyscore < b.similairtyscore) return 1;
+        return a.id - b.id; //if scores are euqal, smaller id comes first.
+      });
+      //updating movies array
+      this.movies = scoredMovies;
     }
   },
   created() {
@@ -124,7 +188,9 @@ export default {
 </script>
 
 <!--
+
 <style>
 
 </style>
+
 -->

@@ -91,11 +91,48 @@ public class CgisuviApplication implements CommandLineRunner {
 				.takenSeatsString(generateSeatsString())
 				.build();
 
+		CatalogItem movie5 = CatalogItem.builder()
+				.title("Ratatouille")
+				.genre("Animation")
+				.language("Estonian")
+				.ageLimit("PG3")
+				.startTime("10:30")
+				.takenSeatsString(generateSeatsString())
+				.build();
+		CatalogItem movie6 = CatalogItem.builder()
+				.title("Dune 2")
+				.genre("Adventure")
+				.language("English")
+				.ageLimit("PG13")
+				.startTime("16:30")
+				.takenSeatsString(generateSeatsString())
+				.build();
+		CatalogItem movie7 = CatalogItem.builder()
+				.title("Dune 2")
+				.genre("Adventure")
+				.language("Russian")
+				.ageLimit("PG13")
+				.startTime("21:30")
+				.takenSeatsString(generateSeatsString())
+				.build();
+		CatalogItem movie8 = CatalogItem.builder()
+				.title("Remember Me")
+				.genre("Drama")
+				.language("English")
+				.ageLimit("PG18")
+				.startTime("13:30")
+				.takenSeatsString(generateSeatsString())
+				.build();
+
 		movieRepo.save(movie1);
 		movieRepo.save(movie2);
 		movieRepo.save(movie3);
 		movieRepo.save(movie4);
 		movieRepo.save(lotr1);
 		movieRepo.save(lotr2);
+		movieRepo.save(movie5);
+		movieRepo.save(movie6);
+		movieRepo.save(movie7);
+		movieRepo.save(movie8);
 	}
 }

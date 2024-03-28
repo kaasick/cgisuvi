@@ -26,21 +26,36 @@
 
 <script>
 //TBD
+import movie from "@/components/movie.vue";
+
+
+
 export default {
   // eslint-disable-next-line
   name: 'seating',
-  props: {
-    id: Number,
-    takenSeatsString: String,
+  props: ['id'],
+
+  data() {
+    return {
+      takenSeatsString: ''
+
+    }
   },
+  created() {
+    this.takenSeatsString = this.$route.query.takenSeatsString || '';
+  },
+
   computed: {
     seats() {
       return Array.from({length: 20}, (_, i) => i + 1);
     },
+
     //have to compute the seats again :(
     takenSeats() {
+      //check, to see if the string is being provided properly, which it seems like it is not...
       if (!this.takenSeatsString) {
         console.log('takenSeatsString is empty or not provided');
+        console.log(movie.takenSeatsString)
         return [];
       }
       const seatsArray = this.takenSeatsString.split(',').map(Number);
@@ -90,5 +105,8 @@ td {
 //if the seat is taken, make it red
 .taken {
   background-color: red;
+}
+table td.taken {
+  background-color: red !important;
 }
 </style>
