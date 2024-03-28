@@ -18,8 +18,8 @@ this functions to up to 5 tickets. Otherwise, seats can be chosen/unchosen by cl
 No account creating system was created to save time and try to focus on the funcionality. The database connection dependancies are there, but the data has been hardcoded and not connected to the database.
 
 Prerequisites to run the app:
-**Node.js**: Required to run the Vue.js frontend.
-**npm (Node Package Manager)**: Used for managing dependencies.
+1) **Node.js**: Required to run the Vue.js frontend.)
+2) **npm (Node Package Manager)**: Used for managing dependencies.
 
 Node.js and npm can be downloaded from [Node.js official website](https://nodejs.org/).
 
