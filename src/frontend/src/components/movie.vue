@@ -6,7 +6,10 @@
 
 
   <div class = "container">
+    <div class="header-area d-flex justify-content-between align-items-center mb-3">
     <h1 class = "text-center">Movies list</h1>
+      <button class="btn btn-primary" @click="refreshMoviesList">Refresh List</button>
+    </div>
     <!-- Sorting controls -->
     <div class = "sorting-control">
       <!-- Basic sorting by chosen {{Attribute}} -->
@@ -64,10 +67,15 @@
         <td> {{ movie.language }}</td>
         <td> {{ movie.ageLimit }}</td>
         <td> {{ movie.startTime }}</td>
+        <td>
+          <!-- Add a button to remove a movie from the watched list -->
+          <button @click="removeFromWatched(movie.id)">Remove</button>
+        </td>
       </tr>
     </table>
-    <!-- Button to clear the list. Button to remove a singular movie?? -->
+    <!-- Button to clear the list. -->
     <button @click = "clearWatchedMovies"> Clear all Watched Movies </button>
+
   </div>
 </template>
 
@@ -91,12 +99,14 @@ export default {
     }
   },
   methods: {
+
     getMovies() {
       movieService.getCatalogItem().then((response) => {
         this.movies = response.data;
         this.sortMovies(); //sort the movies the first time they are fetched by startTime
       })
     },
+    //func to sort movies based on the attributes of the object (title, startTime etc)
     sortMovies() {
       //Have to handle sorting by age limit a bit differently, because it is PG{digit(s)}
       if (this.selectedSort === 'ageLimit') {
@@ -115,12 +125,14 @@ export default {
         })
       }
     },
+    //add the movie to the watched list
     addToWatched(movie) {
-      //Avoid duplicates
+      //Avoid duplicates, as in movies with the same title
       if (!this.watchedMovies.some(watchedMovie => watchedMovie.title ===  movie.title)) {
         this.watchedMovies.push(movie);
       }
     },
+    //to clear the list of watched movies
     clearWatchedMovies() {
       this.watchedMovies = [];
     },
@@ -135,6 +147,8 @@ export default {
         }
       //this.$router.push({ name: 'seating', params: { id: movieId } });
     },
+
+    //method to show the available seats to a movie
     availableSeats(takenSeatsString) {
       if (!takenSeatsString) return 200; //if no seats are taken <=> takenSeatsString is empty
 
@@ -142,6 +156,7 @@ export default {
       return 200 - takenSeatCount //return 200 - seatcount
     },
     //Method to calculate the similarity score, with weights
+    //func. used in sortByWatchedMovies()
     SimilarityScore(movie) {
       let score = 0;
       this.watchedMovies.forEach(watchedMovie => {
@@ -163,8 +178,14 @@ export default {
       });
       return score;
     },
+    //function for the "Recommend movies" button
     sortMoviesByWatched() {
-      const scoredMovies = this.movies.map(movie => {
+      //filterin out the watched movies
+      const unwatchedMovies = this.movies.filter(movie =>
+          !this.watchedMovies.some(watchedMovie => watchedMovie.title === movie.title)
+      );
+
+      const scoredMovies = unwatchedMovies.map(movie => {
         return {
           ...movie,
           similairtyscore: this.SimilarityScore(movie)
@@ -174,11 +195,20 @@ export default {
       scoredMovies.sort((a,b) => {
         if (a.similairtyscore > b.similairtyscore) return -1;
         if (a.similairtyscore < b.similairtyscore) return 1;
-        return a.id - b.id; //if scores are euqal, smaller id comes first.
+        return a.id - b.id; //if scores are equal, smaller id comes first.
       });
       //updating movies array
       this.movies = scoredMovies;
-    }
+    },
+    //to refresh the movies list back to default
+    refreshMoviesList() {
+      this.getMovies();
+      this.sortMovies();
+    },
+    removeFromWatched(movieId) {
+      // Remove one movie, in case of missclicks or smth
+      this.watchedMovies = this.watchedMovies.filter(movie => movie.id !== movieId);
+    },
   },
   created() {
     this.getMovies()
@@ -187,10 +217,10 @@ export default {
 
 </script>
 
-<!--
+
 
 <style>
 
 </style>
 
--->
+

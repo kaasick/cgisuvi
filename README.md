@@ -15,6 +15,8 @@ this functions to up to 5 tickets. Otherwise, seats can be chosen/unchosen by cl
 
 No account creating system was created to save time and try to focus on the funcionality.
 
+Ideas about the work done (in Estonian) can be found in the file "documentation".
+
 
 To run the project
 1) clone the repo

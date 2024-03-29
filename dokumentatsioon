@@ -1,0 +1,31 @@
+Enne ülesande lahendamist, jagasin selle suuremateks tükkideks, et seda oleks lihtsam hallata ja oma töökäiku jälgida. Vastavad tükid
+seadsin endale järgmiselt.
+1) Põhi, SpringBooti initsialiseerimine, Vue ülesseadmine
+Huvitaval kombel oli see päris ajakulukas, sest esimesel katsel õnnestus mul main branchi laadida SpringBooti failid ning Vue failid suutsin eraldi
+üles laadida teisse, Master branchi, peale mida ei õnnestunudki neid kahte kokku "merge"-da ja tegin uue repo
+2) Filmi (CatalogItem) objecti loomine ja muu vajalik BackEndis ning nende andmete kuvamine FrontEndis
+Üks lihtsamaid tegevusi selle projekti osas
+3) Sorteerimine valitud atribuudi põhjal, vaadatud filmide listi loomine ja muu sellega kaasnev
+Ei olnud ka raske, ent hakkas juba rohkem aega võtma, kuna meetodeid hakkas juurde tekkima ja kohati oli raske järge pidada, et kus ma parasjagu olen
+4) Istekohtade kuvamine, hiljem ka nende soovitamine
+See oli minu jaoks kõige raskem osa. Kuskil jooksin mähisesse, unustasin seating.vue komponendile võetud istekohtade Stringi kaasa anda ja siis olin sellega jändamas pikka aega
+Kui selle aga korda sain, siis läks juba ladusamalt edasi. Ka istmekohtade soovitamine (või siis esialgse ala, kuhu istmed panna), selle tegemine oli natuke keerukam.
+5) Filmide soovitamine
+Kuigi see tundus kõige õudsam osa, mida ma pelgasin, siis lähenedes sellele lihtsusega, et igale sobivale atribuudile kaalu andes ja lõpuks skoori leidmises ei olnudki asi nii raske ja õudne, kui alguses tundus
+6) Viimased viimistlused, väiksemate mugavuste lisamine/vigade eemaldamine
+Siin sooritasin veel viimasi viimistlusi enne esitlust, andsin ka rakenduse lähedastele proovida, et kuulda nende arvamust asjadest, mida saaks veel parandada. Näiteks
+Vaadatud filmide põhjal võiks soovitus mitte näidata neid filme, mis juba vaadatud on.
+
+Lisaks on ka mõningad asjad, mida saaks/peaks paremaks tegema.
+1) CatalogItem objekt võiks võetud istmete väärtusena võtta DateTime või midagi sarnast, et ka eristada päevi
+2) Oleks objektid päriselt andmebaasist, saaks Võetud istmeid hoida Json Stringina ja siis oleks asjadega natuke lihtsam tegeleda.
+3) Kasutaja funktsioon, et andmed salvestuksid, kuidagi ka valitud istmeid kasutaja käes hoida ja hõivata need teiste kasutajate jaoks.
+4) Üleüldine disain, kõik on väga väga minimaalne, et lihtsalt kuvada funktsionaalsust
+5) Kindlasti annab mõningaid asju teha lühemalt, efektiivsemalt, et tagada parem jõudlus
+6) Dünaamiline portide fetchimine, et kui peaks juhtuma, et backend ei saa hostitud pordil 8080, loodan, et kirjeldatud lahendus readme failis on piisav, et see praegusel hetkel lahendada
+7) Rakendus dockerisse panna, et tõesti ei peaks alla laadima teisi vajalikke komponente nagu node ja npm, mille versioonid ei ole just kõige uuemad ka.
+
+
+Üldiselt lähenesin ülesandele lihtsusega ja otsekohesusega. Seadsin eesmärgiks tagada kõik nõutud funktsionaalsused ja usun, et need ma ka täitsin. Ajakulu sellele jääb 20 - 35 tunni vahele,
+sest kuigi vahel sai istutud ja mõeldud selle üle, et mida teha, siis tegeliku tööd ei toimunud. Loodan, et kommenteeritud on piisavalt, vabandan, kui kahe silma vahele on jäänud kommentaarid, mis tegin endale aga unustasin kustutada.
+

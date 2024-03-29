@@ -32,7 +32,7 @@
     </table>
     <!-- Screen representation -->
     <div class="screen-container">
-      <div class="screen">Screen</div>
+      <div class="screen">Cinema Screen</div>
     </div>
     <div class = "confirmSeatsButton">
     <button @click = "confirmedSeats">Confirm Seats</button>
@@ -127,10 +127,10 @@ export default {
       this.selectedSeats = []; // Reset results
 
       //
-      let startRow = 4; // startrow
-      let endRow = 7; // endrow
-      let startSeatInRow = 7; // startseat
-      let endSeatInRow = 14; // endseat
+      let startRow = 5; // startrow
+      let endRow = 5; // endrow
+      let startSeatInRow = 11; // startseat
+      let endSeatInRow = 12; // endseat
 
       // try to find a seat in the box
       let found = this.findSeatsInBox(startRow, endRow, startSeatInRow, endSeatInRow);
@@ -217,10 +217,10 @@ td {
   background-color: red;
 }
 table td.taken {
-  background-color: red !important;
+  background-color: #E5E4E2 !important;
 }
 .selected {
-  background-color: lawngreen; /* Change color as needed */
+  background-color: #48EB61; /* Change color as needed */
 }
 
 .confirmSeatsButton {
