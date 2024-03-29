@@ -24,6 +24,7 @@ Lisaks on ka mõningad asjad, mida saaks/peaks paremaks tegema.
 5) Kindlasti annab mõningaid asju teha lühemalt, efektiivsemalt, et tagada parem jõudlus
 6) Dünaamiline portide fetchimine, et kui peaks juhtuma, et backend ei saa hostitud pordil 8080, loodan, et kirjeldatud lahendus readme failis on piisav, et see praegusel hetkel lahendada
 7) Rakendus dockerisse panna, et tõesti ei peaks alla laadima teisi vajalikke komponente nagu node ja npm, mille versioonid ei ole just kõige uuemad ka.
+8) Lisada tuleks ka testid, vähemalt sai seda teostatud katseisikute abil, ent siiski!
 
 
 Üldiselt lähenesin ülesandele lihtsusega ja otsekohesusega. Seadsin eesmärgiks tagada kõik nõutud funktsionaalsused ja usun, et need ma ka täitsin. Ajakulu sellele jääb 20 - 35 tunni vahele,
