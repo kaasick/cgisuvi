@@ -3,6 +3,13 @@ Summer internship test project for CGI
 
 A simple cinema movie catalog with basic sorting and a recommender based on watched movies.  
 
+  
+
+Ideas about the work done (in Estonian) can be found in the file "documentation".
+
+
+  
+
 **Basic sorting, add to watched movies list and get recomendations based on that**:
 For watched movies, click on the ones you have seen (unique titles), and then a recommendation is given if so is wished.
 The recommendation is based on a simple assignment of weights, ending with each movie having a score and then based on that score a new list will be shown, in order of the scores, descebdingly, where the first (highest score) movie is the most recommended one. Note it can only be done if the Watched Movies list has at least 1 movie in it.  
@@ -23,7 +30,7 @@ Prerequisites to run the app:
 
 Node.js and npm can be downloaded from [Node.js official website](https://nodejs.org/).
 
-Ideas about the work done (in Estonian) can be found in the file "documentation".
+
 
 
 To run the project
